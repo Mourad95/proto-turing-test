@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { getStats, getData } from '../services/api.js'
 import KPICard from '../components/KPICard.jsx'
 import FilterBar from '../components/FilterBar.jsx'
@@ -45,6 +46,7 @@ const CreasIcon = () => (
 const COLORS = ['#6366f1', '#8b92f8', '#a855f7', '#22c55e', '#f59e0b', '#ef4444']
 
 function Overview() {
+  const navigate = useNavigate()
   const [filters, setFilters] = useState({})
   const [stats, setStats] = useState(null)
   const [data, setData] = useState([])
@@ -59,15 +61,19 @@ function Overview() {
   const loadData = async () => {
     try {
       setLoading(true)
-      const [statsData, allData] = await Promise.all([
+      // Charger toutes les données pour les options de filtres
+      const allData = await getData()
+      
+      // Charger les données filtrées pour les stats, graphiques et classements
+      const [statsData, filteredData] = await Promise.all([
         getStats(filters),
-        getData()
+        getData(filters)
       ])
       
       setStats(statsData)
-      setData(allData)
+      setData(filteredData) // Utiliser les données filtrées
 
-      // Extraire les options uniques pour les filtres
+      // Extraire les options uniques pour les filtres depuis toutes les données
       const produits = [...new Set(allData.map(item => item.Produit).filter(Boolean))].sort()
       const mois = [...new Set(allData.map(item => item.Mois).filter(Boolean))].sort()
       const statuts = [...new Set(allData.map(item => item.Statut).filter(Boolean))].sort()
@@ -116,7 +122,8 @@ function Overview() {
     .slice(0, 5)
     .map(item => ({
       nom: item['Nom de l\'annonce'],
-      roas: parseFloat(item.ROAS || 0).toFixed(2)
+      roas: parseFloat(item.ROAS || 0).toFixed(2),
+      id: item['Nom de l\'annonce']
     }))
 
   // Top 5 créateurs par conversions
@@ -238,7 +245,11 @@ function Overview() {
           <div className="space-y-2 mt-4">
             {topCreasByROAS.length > 0 ? (
               topCreasByROAS.map((crea, index) => (
-                <div key={index} className="ranking-item">
+                <div 
+                  key={index} 
+                  className="ranking-item cursor-pointer"
+                  onClick={() => crea.id && navigate(`/crea/${encodeURIComponent(crea.id)}`)}
+                >
                   <div className="flex items-center gap-3">
                     <div className={`ranking-number ${index < 3 ? 'top' : ''}`}>
                       {index + 1}

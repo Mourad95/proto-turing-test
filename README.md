@@ -26,6 +26,19 @@ npm run dev
 
 Démarre le backend (port 3001) et le frontend (port 5173).
 
+## Données
+
+Le fichier `AG1-Data.csv` doit être placé dans le dossier `data/` à la racine du projet.
+
+Si vous n'avez pas le fichier CSV original, vous pouvez générer des données de test :
+
+```bash
+cd data
+node generate-test-data.js
+```
+
+Cela générera un fichier `AG1-Data.csv` avec 1268 lignes de données de test.
+
 ## Technologies
 
 - **Backend** : Node.js, Express, csv-parser

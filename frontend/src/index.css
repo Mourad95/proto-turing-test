@@ -111,7 +111,11 @@
   }
 
   .filter-group {
-    @apply flex items-start md:items-center gap-3 md:gap-4 flex-wrap;
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4;
+  }
+
+  .filter-item {
+    @apply flex flex-col;
   }
 
   .filter-select {
@@ -142,22 +146,33 @@
   }
 
   .data-table table {
-    @apply min-w-full;
+    @apply w-full table-auto;
+    table-layout: auto;
   }
 
   .table-header {
     @apply bg-gradient-to-r from-gray-50 to-gray-100/50 border-b border-gray-200;
   }
 
+  .table-header tr {
+    @apply table-row;
+  }
+
   .table-header-cell {
     @apply px-3 md:px-6 py-3 md:py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider;
     @apply cursor-pointer hover:bg-gray-100/50 transition-all duration-200;
+    @apply table-cell;
+    display: table-cell;
+  }
+
+  .table-header-cell > div {
     @apply flex items-center gap-2;
   }
 
   .table-row {
     @apply border-b border-gray-100 hover:bg-gradient-to-r hover:from-primary-50/30 hover:to-transparent;
     @apply transition-all duration-200 cursor-pointer;
+    display: table-row;
   }
 
   .table-row:last-child {
@@ -167,6 +182,8 @@
   .table-cell {
     @apply px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-gray-700;
     @apply font-medium;
+    @apply whitespace-nowrap;
+    display: table-cell;
   }
 
   .table-cell.break-words {
