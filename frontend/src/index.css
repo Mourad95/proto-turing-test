@@ -34,10 +34,11 @@
     @apply bg-white/80 backdrop-blur-xl;
     @apply border-r border-gray-200/50;
     @apply shadow-soft;
+    @apply hidden md:block;
   }
 
   .main-content {
-    @apply ml-[var(--sidebar-width)] p-8;
+    @apply md:ml-[var(--sidebar-width)] p-4 md:p-6 lg:p-8;
     @apply animate-fade-in;
   }
 
@@ -46,7 +47,7 @@
   }
 
   .page-title {
-    @apply text-3xl font-bold text-gray-900 tracking-tight;
+    @apply text-2xl md:text-3xl font-bold text-gray-900 tracking-tight;
     @apply bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent;
   }
 
@@ -110,7 +111,7 @@
   }
 
   .filter-group {
-    @apply flex items-center gap-4 flex-wrap;
+    @apply flex items-start md:items-center gap-3 md:gap-4 flex-wrap;
   }
 
   .filter-select {
@@ -137,6 +138,11 @@
   .data-table {
     @apply bg-white rounded-2xl shadow-soft border border-gray-100 overflow-hidden;
     @apply animate-slide-up;
+    @apply overflow-x-auto;
+  }
+
+  .data-table table {
+    @apply min-w-full;
   }
 
   .table-header {
@@ -144,7 +150,7 @@
   }
 
   .table-header-cell {
-    @apply px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider;
+    @apply px-3 md:px-6 py-3 md:py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider;
     @apply cursor-pointer hover:bg-gray-100/50 transition-all duration-200;
     @apply flex items-center gap-2;
   }
@@ -159,8 +165,12 @@
   }
 
   .table-cell {
-    @apply px-6 py-4 whitespace-nowrap text-sm text-gray-700;
+    @apply px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-gray-700;
     @apply font-medium;
+  }
+
+  .table-cell.break-words {
+    @apply whitespace-normal;
   }
 }
 
@@ -229,17 +239,18 @@
 /* Graphiques modernes */
 @layer components {
   .chart-container {
-    @apply bg-white rounded-2xl shadow-soft border border-gray-100 p-6;
+    @apply bg-white rounded-2xl shadow-soft border border-gray-100 p-4 md:p-6;
     @apply animate-slide-up;
+    @apply overflow-x-auto;
   }
 
   .chart-title {
-    @apply text-lg font-bold text-gray-900 mb-6;
+    @apply text-base md:text-lg font-bold text-gray-900 mb-4 md:mb-6;
     @apply flex items-center gap-2;
   }
 
   .chart-subtitle {
-    @apply text-sm text-gray-500 mt-1;
+    @apply text-xs md:text-sm text-gray-500 mt-1;
   }
 }
 

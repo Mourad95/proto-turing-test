@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { getStats, getData } from '../services/api.js'
 import KPICard from '../components/KPICard.jsx'
 import FilterBar from '../components/FilterBar.jsx'
+import Loading from '../components/Loading.jsx'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 
 // Icônes SVG pour les KPIs
@@ -136,11 +137,7 @@ function Overview() {
   }
 
   if (loading && !stats) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-gray-500">Chargement...</div>
-      </div>
-    )
+    return <Loading />
   }
 
   return (
