@@ -15,3 +15,4 @@ function KPICard({ icon, label, value, trend, trendLabel }) {
 
 export default KPICard
 
+

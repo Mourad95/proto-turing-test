@@ -60,6 +60,42 @@ function FilterBar({ filters, onFilterChange, options = {} }) {
           </div>
         )}
 
+        {options.createur && (
+          <div>
+            <label className="filter-label">Créateur</label>
+            <select
+              className="filter-select"
+              value={filters.createur || ''}
+              onChange={(e) => handleChange('createur', e.target.value)}
+            >
+              <option value="">Tous les créateurs</option>
+              {options.createur.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {options.type && (
+          <div>
+            <label className="filter-label">Type de contenu</label>
+            <select
+              className="filter-select"
+              value={filters.type || ''}
+              onChange={(e) => handleChange('type', e.target.value)}
+            >
+              <option value="">Tous les types</option>
+              {options.type.map((t) => (
+                <option key={t} value={t}>
+                  {t}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
         {options.search !== undefined && (
           <div className="flex-1 min-w-[200px]">
             <label className="filter-label">Recherche</label>
@@ -78,4 +114,5 @@ function FilterBar({ filters, onFilterChange, options = {} }) {
 }
 
 export default FilterBar
+
 
